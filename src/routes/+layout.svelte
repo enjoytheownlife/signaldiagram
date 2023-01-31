@@ -11,7 +11,7 @@
 
 	$tileTypes = data.tileTypes;
 
-	$: $tileTypes.length && updateTileLists($tileTypes);
+	$: $tileTypes?.length && updateTileLists($tileTypes);
 
 	function checkBrowser() {
 		if (!navigator.userAgent.includes('Chrome')) {

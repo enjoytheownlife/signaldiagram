@@ -92,17 +92,17 @@
 			})
 			.attr('stroke-width', (d) => d.getLineWidth() * 2)
 			.attr('pointer-events', 'visible')
-			.on('mouseover', (e) => {
+			.on('mouseover', (d) => {
 				if ($isDrawMode) return;
-				e.stopPropagation();
-				$isSelectMode && !$isDrawingSignalLine && d3.select(e.path[0]).attr('stroke', hoveredColor);
+				d.stopPropagation();
+				$isSelectMode && !$isDrawingSignalLine && d3.select(d.target).attr('stroke', hoveredColor);
 			})
 			.on('mouseout', (e, d) => {
 				if ($isDrawMode) return;
 				e.stopPropagation();
 				$isSelectMode &&
 					!$isDrawingSignalLine &&
-					d3.select(e.path[0]).attr('stroke', () => {
+					d3.select(e.target).attr('stroke', () => {
 						if (d.isSelected) {
 							return selectedColor;
 						} else {
@@ -114,7 +114,7 @@
 				if ($isDrawMode) return;
 				e.stopPropagation();
 
-				let i = e.path[0].__data__.i;
+				let i = e.target.__data__.i;
 
 				if ($isSelectMode && !$isDrawingSignalLine) {
 					$screens[$currentScreenIndex].signalLines.toggleSignalLine(i);

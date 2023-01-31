@@ -175,8 +175,8 @@
 	}
 
 	#panels {
-		position: absolute;
+		/* position: absolute; */
 		flex: 1;
-		width: 100%;
+		/* width: 100%; */
 	}
 </style>

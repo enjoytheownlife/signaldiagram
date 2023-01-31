@@ -1,26 +1,24 @@
-// @ts-ignore
+export const load = async ({ fetch }) => {
+	const sortAndStoreTiles = (tiles) => {
+		tiles?.sort((a, b) => {
+			if (a.make < b.make) {
+				return -1;
+			}
+			if (a.make > b.make) {
+				return 1;
+			}
+			if (a.model < b.model) {
+				return -1;
+			}
+			if (a.model > b.model) {
+				return 1;
+			}
+			return 0;
+		});
 
-const sortAndStoreTiles = (tiles) => {
-	tiles.sort((a, b) => {
-		if (a.make < b.make) {
-			return -1;
-		}
-		if (a.make > b.make) {
-			return 1;
-		}
-		if (a.model < b.model) {
-			return -1;
-		}
-		if (a.model > b.model) {
-			return 1;
-		}
-		return 0;
-	});
+		return tiles;
+	};
 
-	return tiles;
-};
-
-export const load = ({ fetch }) => {
 	const fetchTileTypes = async () => {
 		const tiles = await fetch('./api/tiles');
 		const data = await tiles?.json();
@@ -29,6 +27,6 @@ export const load = ({ fetch }) => {
 	};
 
 	return {
-		tileTypes: fetchTileTypes()
+		tileTypes: await fetchTileTypes()
 	};
 };

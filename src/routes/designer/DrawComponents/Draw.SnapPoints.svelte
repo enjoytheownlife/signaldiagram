@@ -46,6 +46,7 @@
 			.data(snapPoints, (d) => d.i);
 
 		// 2
+		// Raise the snap points over top the signal lines
 		$snapPointsGroupEnterRef = $snapPointsGroupRef
 			.enter()
 			.append('g')
@@ -81,12 +82,9 @@
 			.attr('stroke-alignment', 'inner')
 			.on('mouseover', function (d, i) {
 				if ($isDrawingSignalLine) {
-					$screens[$currentScreenIndex].signalLines.setDestinationSnapPointIndex(
-						d.path[0].__data__
-					);
+					$screens[$currentScreenIndex].signalLines.setDestinationSnapPointIndex(d.target.__data__);
 				}
 				d.stopPropagation();
-				let obj = d.path[0].__data__;
 				d3.select(this).attr('fill', hoveredColor);
 			})
 			.on('mouseout', function (d, i) {
@@ -98,7 +96,7 @@
 				d.stopPropagation();
 				if (!$isDrawMode) return;
 
-				$screens[$currentScreenIndex].signalLines.setOriginSnapPointIndex(d.path[0].__data__);
+				$screens[$currentScreenIndex].signalLines.setOriginSnapPointIndex(d.target.__data__);
 				setIsDrawingSignalLine(true);
 			})
 			.on('mouseup', (d) => {

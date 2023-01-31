@@ -202,6 +202,9 @@ export const colorButtons: Writable<string[]> = writable([
 	'#ffffff'
 ]);
 
+// This following are the patterns for drawing the predefined signal line buttons
+// I have no idea what I've done here an it's buggy
+
 export const signalDirectionButtons: Writable<DirectionObj[]> = writable([
 	{
 		points: [

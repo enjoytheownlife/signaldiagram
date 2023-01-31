@@ -115,7 +115,7 @@
 	};
 </script>
 
-<div id="snappoints" in:fade={{ duration: 150 }} out:fade={{ duration: 0 }}>
+<div id="snappoints" class="snappoints" in:fade={{ duration: 150 }} out:fade={{ duration: 0 }}>
 	<div class="crisscross">
 		<button
 			class="criss-cross"
@@ -240,8 +240,7 @@
 	{/if}
 </div>
 
-<div class="margin" />
-
+<!-- <div class="margin" /> -->
 <style>
 	.label {
 		cursor: pointer;
@@ -305,8 +304,9 @@
 	}
 
 	#snappoints {
-		position: absolute;
 		flex: 1;
 		width: 100%;
+	}
+	.snappoints {
 	}
 </style>

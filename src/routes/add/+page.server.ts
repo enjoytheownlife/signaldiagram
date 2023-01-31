@@ -1,4 +1,4 @@
-import { invalid } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 import { z } from 'zod';
 
@@ -77,7 +77,7 @@ export const actions = {
 		} catch (err) {
 			const { fieldErrors: errors } = err.flatten();
 
-			return invalid(401, {
+			return fail(401, {
 				data: dataObj,
 				errors
 			});
@@ -87,7 +87,7 @@ export const actions = {
 
 		if (dataObj._id) {
 			if (!keyIsValid) {
-				return invalid(401);
+				return fail(401);
 			}
 
 			let updateObj = { ...result, isApproved: true, _id: dataObj._id };

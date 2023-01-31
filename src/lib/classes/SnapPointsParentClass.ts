@@ -160,7 +160,7 @@ export class SnapPoints implements SnapPointsType {
 		panelsClass.deSelect();
 		signalLinesClass.deSelect();
 
-		const i = e.path[0].__data__.pointIndexFullArray;
+		const i = e.target.__data__.pointIndexFullArray;
 
 		const current = this.array[i].isSelected;
 

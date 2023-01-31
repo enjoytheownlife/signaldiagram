@@ -1,24 +1,25 @@
-// @ts-ignore
-import clientPromise from '$lib/mongodb-client';
+import { TileTypeModel } from '$lib/models';
+import { offlineData } from '$lib/db';
+import * as dotenv from 'dotenv';
 import { ObjectId } from 'mongodb';
 
-const COLLECTION = 'tile-types';
+dotenv.config();
+
+const env = process.env['ENVIRONMENT'];
 
 export const GET = async () => {
-	// @ts-ignore
-	const dbConnection = await clientPromise;
-
-	const env = process.env['ENVIRONMENT'];
-
-	const db = dbConnection.db(env);
-
 	let resArray: any = [];
 
-	const collection = db.collection(COLLECTION).find();
+	if (env === 'dev') {
+		resArray = offlineData;
+	}
 
-	await collection.forEach((c: any) => {
-		resArray.push(c);
-	});
+	if (env === 'prod') {
+		// @ts-ignore
+		let tiles = await TileTypeModel.find();
+
+		resArray = tiles;
+	}
 
 	return new Response(JSON.stringify(resArray), { status: 200 });
 };
@@ -26,15 +27,9 @@ export const GET = async () => {
 export const POST = async ({ request }) => {
 	const obj = await request.json();
 
-	const dbConnection = await clientPromise;
+	const newTileType = new TileTypeModel(obj);
 
-	const env = process.env['ENVIRONMENT'];
-
-	const db = dbConnection.db(env);
-
-	const collection = db.collection(COLLECTION);
-
-	const res = await collection.insertOne(obj);
+	let res = await newTileType.save();
 
 	return new Response(JSON.stringify(res), { status: 200 });
 };
@@ -42,18 +37,10 @@ export const POST = async ({ request }) => {
 export const PATCH = async ({ request }) => {
 	const obj = await request.json();
 
-	const dbConnection = await clientPromise;
-
-	const env = process.env['ENVIRONMENT'];
-
-	const db = dbConnection.db(env);
-
-	const collection = db.collection(COLLECTION);
-
 	const objIDRemoved = { ...obj };
 	delete objIDRemoved._id;
 
-	const res = await collection.updateOne({ _id: new ObjectId(obj._id) }, { $set: objIDRemoved });
+	const res = await TileTypeModel.updateOne({ _id: new ObjectId(obj._id) }, { $set: objIDRemoved });
 
 	return new Response(JSON.stringify(res), { status: 200 });
 };

@@ -28,6 +28,7 @@ export class SignalLines implements SignalLinesType {
 	origin = {
 		snapPointIndex: null,
 		panelIndex: null,
+
 		pointIndexWithinPanel: null
 	};
 

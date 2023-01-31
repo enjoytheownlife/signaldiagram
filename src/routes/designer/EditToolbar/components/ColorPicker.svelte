@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { colorButtons, colorState } from '$lib/store.designer';
-	import { fly } from 'svelte/transition';
+	import { fly, slide } from 'svelte/transition';
 
 	import type { ColorObjKey } from '$lib/types';
 
@@ -26,7 +26,8 @@
 </div>
 
 {#if isOpen}
-	<div transition:fly={{ y: -10, duration: 110 }}>
+	<div transition:slide={{ duration: 150 }}>
+		<!-- <div transition:fly={{ y: -10, duration: 110 }}> -->
 		<div id="color-button-container">
 			{#each $colorButtons as color}
 				<button
@@ -38,9 +39,9 @@
 				/>
 			{/each}
 		</div>
-		<div>
+		<!-- <div>
 			<input type="color" id="custom-color-button" bind:value={$colorState[key][layer]} />
-		</div>
+		</div> -->
 	</div>
 {/if}
 
@@ -54,12 +55,14 @@
 		transition: flex 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 		border-radius: 1.5px;
 	}
+
 	.subtitle {
 		margin-top: 10px;
 		display: flex;
 		/* background-color: green; */
 		align-items: center;
 	}
+
 	#color-button-container {
 		margin-top: 10px;
 		display: grid;
@@ -67,11 +70,7 @@
 		width: 100%;
 		gap: 9px;
 	}
-	#custom-color-button {
-		width: 100%;
-		height: 30px;
-		margin-top: 10px;
-	}
+
 	.color-button {
 		width: 100%;
 		padding-top: 90%;

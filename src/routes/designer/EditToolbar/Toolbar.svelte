@@ -95,5 +95,7 @@
 	#selectors {
 		position: relative;
 		flex: 1;
+
+		display: flex;
 	}
 </style>
