@@ -3,10 +3,10 @@ export const offlineData = [
 		_id: '637046e8053dad336b1d1170',
 		make: 'ROE',
 		model: 'CB8',
-		pixelWidth: '72',
-		pixelHeight: '144',
-		mmWidth: '600',
-		mmHeight: '1200',
+		pixelWidth: 72,
+		pixelHeight: 144,
+		mmWidth: 600,
+		mmHeight: 1200,
 		isApproved: true
 	},
 
@@ -14,10 +14,10 @@ export const offlineData = [
 		_id: '6371af435bccc77d06f19c06',
 		make: 'ROE',
 		model: 'BP 2.8',
-		pixelWidth: '176',
-		pixelHeight: '176',
-		mmWidth: '500',
-		mmHeight: '500',
+		pixelWidth: 176,
+		pixelHeight: 176,
+		mmWidth: 500,
+		mmHeight: 500,
 		isApproved: true
 	},
 
